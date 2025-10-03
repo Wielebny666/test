@@ -1,8 +1,6 @@
 cmake_minimum_required(VERSION 3.28)
 
-project(FWLibrary)
-
-message(STATUS "FW_Library included")
+project(Testy)
 
 if(NOT DEFINED BUILD_TESTS)
     set(BUILD_TESTS FALSE CACHE BOOL "Build project tests")
