@@ -1,0 +1,129 @@
+{
+    "version": 2,
+    "configurePresets": [
+        {
+            "name": "default",
+            "displayName": "Default config preset",
+            "description": "Sets Ninja generator, build and install directory",
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/build/",
+            "cacheVariables": {
+                "CMAKE_CXX_OUTPUT_EXTENSION_REPLACE": "ON"
+            },
+            "hidden": true
+        },
+        {
+            "name": "Debug",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug"
+            },
+            "hidden": true
+        },
+        {
+            "name": "Release",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "RelWithDebInfo"
+            },
+            "hidden": true
+        },
+        {
+            "name": "Windows",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Windows",
+                "CMAKE_C_COMPILER": "C:/apps/cygwin64/bin/gcc.exe",
+                "CMAKE_CXX_COMPILER": "C:/apps/cygwin64/bin/g++.exe"
+            },
+            "hidden": true
+        },
+        {
+            "name": "Docker",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "CMAKE_C_COMPILER": "/usr/bin/gcc",
+                "CMAKE_CXX_COMPILER": "/usr/bin/g++"
+            },
+            "hidden": true
+        },
+
+        {
+            "name": "test",
+            "cacheVariables": {
+                "CTEST_USE_LAUNCHERS": "ON",
+                "BUILD_TESTS": {
+                    "type": "BOOL",
+                    "value": "ON"
+                }
+            },
+            "hidden": true
+        },
+        {
+            "name": "x64-Debug-Test",
+            "description": "x64 (Debug)",
+            "inherits": [
+                "default",
+                "test",
+                "Debug"
+            ]
+        },
+        {
+            "name": "x64-Release-Test",
+            "description": "x64 (Release)",
+            "inherits": [
+                "default",
+                "test",
+                "Release"
+            ]
+        },
+        {
+            "name": "x64-Windows-Test",
+            "description": "x64 (Windows)",
+            "inherits": [
+                "default",
+                "test",
+                "Windows"
+            ]
+        },
+        {
+            "name": "x64-Docker-Test",
+            "description": "x64 (Docker)",
+            "inherits": [
+                "default",
+                "test",
+                "Docker"
+            ]
+        }
+    ],
+    "testPresets": [
+        {
+            "name": "common",
+            "output": {
+                "outputOnFailure": true
+            },
+            "execution": {
+                "noTestsAction": "error",
+                "stopOnFailure": true
+            },
+            "hidden": true
+        },
+        {
+            "name": "x64-Debug-Test",
+            "configurePreset": "x64-Debug-Test",
+            "inherits": "common"
+        },
+        {
+            "name": "x64-Release-Test",
+            "configurePreset": "x64-Release-Test",
+            "inherits": "common"
+        },
+        {
+            "name": "x64-Windows-Test",
+            "configurePreset": "x64-Windows-Test",
+            "inherits": "common"
+        },
+        {
+            "name": "x64-Docker-Test",
+            "configurePreset": "x64-Docker-Test",
+            "inherits": "common"
+        }
+    ]
+}
